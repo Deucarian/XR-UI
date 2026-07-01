@@ -1,0 +1,41 @@
+{
+  "name": "com.deucarian.xr-ui",
+  "version": "0.1.0",
+  "displayName": "Deucarian XR UI",
+  "description": "Standalone XR-ready uGUI pressable controls, world canvas helpers, poke affordances, and neutral visual settings.",
+  "unity": "2022.3",
+  "author": {
+    "name": "Deucarian"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deucarian/XR-UI.git"
+  },
+  "keywords": [
+    "deucarian",
+    "xr",
+    "ui",
+    "ugui",
+    "pressable"
+  ],
+  "dependencies": {
+    "com.deucarian.common": "0.2.0",
+    "com.unity.inputsystem": "1.8.1",
+    "com.unity.textmeshpro": "3.0.6",
+    "com.unity.ugui": "1.0.0",
+    "com.unity.xr.core-utils": "2.4.0",
+    "com.unity.xr.interaction.toolkit": "3.3.1"
+  },
+  "samples": [
+    {
+      "displayName": "Pressable Controls",
+      "description": "Runtime-created uGUI examples for Deucarian XR UI buttons, toggles, sliders, and dropdowns.",
+      "path": "Samples~/Pressable Controls"
+    },
+    {
+      "displayName": "Spatial Keyboard Adapter",
+      "description": "Optional adapter notes for wiring Unity XR Interaction Toolkit Spatial Keyboard samples to press-gated XR UI controls.",
+      "path": "Samples~/Spatial Keyboard Adapter"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "packageId": "com.deucarian.xr-ui",
+  "displayName": "Deucarian XR UI",
+  "ownedCapabilities": [
+    "xr-world-ui-controls"
+  ],
+  "runtimeAssemblies": [
+    "Deucarian.XRUI"
+  ],
+  "editorAssemblies": [
+    "Deucarian.XRUI.Editor"
+  ],
+  "sampleAssemblies": [],
+  "testAssemblies": [
+    "Deucarian.XRUI.Tests.EditMode"
+  ],
+  "requiredDependencies": [
+    "com.deucarian.common",
+    "com.unity.inputsystem",
+    "com.unity.textmeshpro",
+    "com.unity.ugui",
+    "com.unity.xr.core-utils",
+    "com.unity.xr.interaction.toolkit"
+  ],
+  "optionalVersionDefinedDependencies": [],
+  "allowedDirectDebugCalls": [],
+  "allowedDirectUnityObjectLifetimeCalls": [],
+  "expectedSamplesRoot": "Samples~"
+}
