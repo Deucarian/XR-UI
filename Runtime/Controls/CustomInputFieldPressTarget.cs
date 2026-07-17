@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,7 +45,7 @@ namespace Deucarian.XRUI.Controls
 
             if (_inputField != null)
             {
-                _inputField.shouldActivateOnSelect = false;
+                TmpInputFieldActivationCompatibility.SetShouldActivateOnSelect(_inputField, false);
             }
 
             if (_pressableSurface != null)
@@ -59,7 +60,9 @@ namespace Deucarian.XRUI.Controls
 
             if (_inputField != null && _hasOriginalShouldActivateOnSelect)
             {
-                _inputField.shouldActivateOnSelect = _originalShouldActivateOnSelect;
+                TmpInputFieldActivationCompatibility.SetShouldActivateOnSelect(
+                    _inputField,
+                    _originalShouldActivateOnSelect);
             }
 
             StopPendingCoroutines();
@@ -96,7 +99,7 @@ namespace Deucarian.XRUI.Controls
 
             if (_inputField != null)
             {
-                _inputField.shouldActivateOnSelect = false;
+                TmpInputFieldActivationCompatibility.SetShouldActivateOnSelect(_inputField, false);
             }
         }
         #endregion
@@ -122,8 +125,9 @@ namespace Deucarian.XRUI.Controls
                 return;
             }
 
-            _originalShouldActivateOnSelect = _inputField.shouldActivateOnSelect;
-            _hasOriginalShouldActivateOnSelect = true;
+            _hasOriginalShouldActivateOnSelect = TmpInputFieldActivationCompatibility.TryGetShouldActivateOnSelect(
+                _inputField,
+                out _originalShouldActivateOnSelect);
         }
 
         public bool CanActivatePress(CustomPressableSurface _)
@@ -205,5 +209,38 @@ namespace Deucarian.XRUI.Controls
             }
         }
         #endregion
+    }
+
+    internal static class TmpInputFieldActivationCompatibility
+    {
+        private static readonly PropertyInfo ShouldActivateOnSelectProperty = typeof(TMP_InputField).GetProperty(
+            "shouldActivateOnSelect",
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+        internal static bool TryGetShouldActivateOnSelect(TMP_InputField inputField, out bool value)
+        {
+            value = false;
+            if (inputField == null || ShouldActivateOnSelectProperty == null ||
+                ShouldActivateOnSelectProperty.PropertyType != typeof(bool) ||
+                !ShouldActivateOnSelectProperty.CanRead)
+            {
+                return false;
+            }
+
+            value = (bool)ShouldActivateOnSelectProperty.GetValue(inputField);
+            return true;
+        }
+
+        internal static void SetShouldActivateOnSelect(TMP_InputField inputField, bool value)
+        {
+            if (inputField == null || ShouldActivateOnSelectProperty == null ||
+                ShouldActivateOnSelectProperty.PropertyType != typeof(bool) ||
+                !ShouldActivateOnSelectProperty.CanWrite)
+            {
+                return;
+            }
+
+            ShouldActivateOnSelectProperty.SetValue(inputField, value);
+        }
     }
 }
