@@ -176,7 +176,7 @@ namespace Deucarian.XRUI.Controls
                 }
 
                 inputTarget.Configure(inputField, pressableSurface);
-                inputField.shouldActivateOnSelect = false;
+                TmpInputFieldActivationCompatibility.SetShouldActivateOnSelect(inputField, false);
 
                 RefreshOptionalPressTargetBindings(inputField);
             }

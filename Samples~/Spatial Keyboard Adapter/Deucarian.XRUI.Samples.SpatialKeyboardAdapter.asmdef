@@ -1,0 +1,6 @@
+{
+  "name": "Deucarian.XRUI.Samples.SpatialKeyboardAdapter",
+  "rootNamespace": "Deucarian.XRUI.Samples",
+  "references": ["Deucarian.XRUI"],
+  "autoReferenced": false
+}

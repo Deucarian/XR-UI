@@ -1,6 +1,7 @@
 {
   "packageId": "com.deucarian.xr-ui",
   "displayName": "Deucarian XR UI",
+  "samplePolicy": "playable-scene",
   "ownedCapabilities": [
     "xr-world-ui-controls"
   ],
@@ -10,7 +11,10 @@
   "editorAssemblies": [
     "Deucarian.XRUI.Editor"
   ],
-  "sampleAssemblies": [],
+  "sampleAssemblies": [
+    "Deucarian.XRUI.Samples.PressableControls",
+    "Deucarian.XRUI.Samples.SpatialKeyboardAdapter"
+  ],
   "testAssemblies": [
     "Deucarian.XRUI.Tests.EditMode"
   ],

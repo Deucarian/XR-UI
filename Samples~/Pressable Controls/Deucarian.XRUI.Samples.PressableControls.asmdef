@@ -1,0 +1,6 @@
+{
+  "name": "Deucarian.XRUI.Samples.PressableControls",
+  "rootNamespace": "Deucarian.XRUI.Samples",
+  "references": ["Deucarian.XRUI", "Unity.ugui"],
+  "autoReferenced": false
+}
