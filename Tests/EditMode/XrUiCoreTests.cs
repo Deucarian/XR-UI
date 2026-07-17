@@ -1,5 +1,6 @@
 using Deucarian.XRUI.Controls;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,6 +66,24 @@ namespace Deucarian.XRUI.Tests
             finally
             {
                 XrUiControlExclusionRegistry.UnregisterSelectablePredicate(Predicate);
+                Object.DestroyImmediate(gameObject);
+            }
+        }
+
+        [Test]
+        public void InputFieldPressTargetConfiguresAcrossSupportedTmpVersions()
+        {
+            var gameObject = new GameObject("Input Field", typeof(RectTransform));
+            try
+            {
+                TMP_InputField inputField = gameObject.AddComponent<TMP_InputField>();
+                CustomPressableSurface surface = gameObject.AddComponent<CustomPressableSurface>();
+                CustomInputFieldPressTarget target = gameObject.AddComponent<CustomInputFieldPressTarget>();
+
+                Assert.DoesNotThrow(() => target.Configure(inputField, surface));
+            }
+            finally
+            {
                 Object.DestroyImmediate(gameObject);
             }
         }
