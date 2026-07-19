@@ -32,7 +32,7 @@ namespace Deucarian.XRUI.Controls.Editor
 
     public static class CustomButtonReplacementEditor
     {
-        private const string MENU_ROOT = "Tools/Deucarian/XR UI/Custom Buttons/";
+        private const string MENU_ROOT = "Tools/Deucarian/Experience and Interaction/World Interaction/XR UI/";
         private const string SETTINGS_FOLDER = "Assets/Deucarian/XR UI/Resources";
         private const string SETTINGS_PATH = SETTINGS_FOLDER + "/CustomButtonSettings.asset";
         private const string PALETTE_PATH = SETTINGS_FOLDER + "/XrUiColorPalette.asset";
