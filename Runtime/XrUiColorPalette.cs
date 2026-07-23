@@ -47,7 +47,6 @@ namespace Deucarian.XRUI
     [CreateAssetMenu(fileName = "XrUiColorPalette", menuName = "Deucarian/XR UI/Color Palette")]
     public sealed class XrUiColorPalette : ScriptableObject
     {
-        private const string ResourcePath = "XrUiColorPalette";
         private const float SemanticColorMatchTolerance = 0.08f;
         private const float SemanticAlphaMatchTolerance = 0.02f;
 
@@ -84,10 +83,6 @@ namespace Deucarian.XRUI
         public static readonly Color DefaultDropdownInvalidState = new(1f, 0f, 0f, 1f);
         public static readonly Color DefaultKeyboardContentAccent = new(0.1f, 1f, 0f, 1f);
         public static readonly Color DefaultTransparent = new(1f, 1f, 1f, 0f);
-
-        private static XrUiColorPalette _runtimeFallback;
-        private static XrUiColorPalette _runtimeOverride;
-        private static XrUiColorPalette _resourcesPalette;
 
         public static event Action<XrUiColorPalette> PaletteChanged;
 
@@ -182,34 +177,7 @@ namespace Deucarian.XRUI
         public float SelectedMultiplier { get => _selectedMultiplier; set => SetMultiplier(ref _selectedMultiplier, value); }
         public float DisabledMultiplier { get => _disabledMultiplier; set => SetMultiplier(ref _disabledMultiplier, value); }
 
-        public static XrUiColorPalette Global
-        {
-            get
-            {
-                if (_runtimeOverride != null)
-                {
-                    return _runtimeOverride;
-                }
-
-                if (_resourcesPalette == null)
-                {
-                    _resourcesPalette = Resources.Load<XrUiColorPalette>(ResourcePath);
-                }
-
-                if (_resourcesPalette != null)
-                {
-                    return _resourcesPalette;
-                }
-
-                if (_runtimeFallback == null)
-                {
-                    _runtimeFallback = CreateInstance<XrUiColorPalette>();
-                    _runtimeFallback.hideFlags = HideFlags.HideAndDontSave;
-                }
-
-                return _runtimeFallback;
-            }
-        }
+        public static XrUiColorPalette Global => XrUiColorPaletteRegistry.Global;
 
         public Color GetSemanticColor(XrUiSemanticColor semantic)
         {
@@ -399,30 +367,21 @@ namespace Deucarian.XRUI
 #endif
         }
 
-        public static void SetRuntimePalette(XrUiColorPalette palette)
+        public static void SetRuntimePalette(XrUiColorPalette palette) =>
+            NotifyGlobalPaletteChangedIfNeeded(
+                XrUiColorPaletteRegistry.SetRuntimePalette(palette));
+
+        public static void ClearRuntimePalette() =>
+            NotifyGlobalPaletteChangedIfNeeded(
+                XrUiColorPaletteRegistry.ClearRuntimePalette());
+
+        private static void NotifyGlobalPaletteChangedIfNeeded(bool paletteChanged)
         {
-            if (_runtimeOverride == palette)
+            if (!paletteChanged)
             {
                 return;
             }
 
-            _runtimeOverride = palette;
-            NotifyGlobalPaletteChanged();
-        }
-
-        public static void ClearRuntimePalette()
-        {
-            if (_runtimeOverride == null)
-            {
-                return;
-            }
-
-            _runtimeOverride = null;
-            NotifyGlobalPaletteChanged();
-        }
-
-        private static void NotifyGlobalPaletteChanged()
-        {
             PaletteChanged?.Invoke(Global);
             CustomButtonSettings.NotifyGlobalSettingsChanged();
 #if UNITY_EDITOR
