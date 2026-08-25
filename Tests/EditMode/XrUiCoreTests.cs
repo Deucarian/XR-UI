@@ -18,6 +18,54 @@ namespace Deucarian.XRUI.Tests
         }
 
         [Test]
+        public void RuntimePaletteOverrideOwnsGlobalSelectionAndNotifiesOnlyOnChange()
+        {
+            XrUiColorPalette.ClearRuntimePalette();
+            XrUiColorPalette baseline = XrUiColorPalette.Global;
+            XrUiColorPalette runtimeOverride =
+                ScriptableObject.CreateInstance<XrUiColorPalette>();
+            int changeCount = 0;
+            XrUiColorPalette firstChangedPalette = null;
+            XrUiColorPalette secondChangedPalette = null;
+
+            void RecordChange(XrUiColorPalette palette)
+            {
+                changeCount++;
+                if (changeCount == 1)
+                {
+                    firstChangedPalette = palette;
+                }
+                else if (changeCount == 2)
+                {
+                    secondChangedPalette = palette;
+                }
+            }
+
+            try
+            {
+                XrUiColorPalette.PaletteChanged += RecordChange;
+
+                XrUiColorPalette.SetRuntimePalette(runtimeOverride);
+                Assert.AreSame(runtimeOverride, XrUiColorPalette.Global);
+
+                XrUiColorPalette.SetRuntimePalette(runtimeOverride);
+                Assert.AreEqual(1, changeCount);
+
+                XrUiColorPalette.ClearRuntimePalette();
+                Assert.AreSame(baseline, XrUiColorPalette.Global);
+                Assert.AreEqual(2, changeCount);
+                Assert.AreSame(runtimeOverride, firstChangedPalette);
+                Assert.AreSame(baseline, secondChangedPalette);
+            }
+            finally
+            {
+                XrUiColorPalette.PaletteChanged -= RecordChange;
+                XrUiColorPalette.ClearRuntimePalette();
+                Object.DestroyImmediate(runtimeOverride);
+            }
+        }
+
+        [Test]
         public void GlobalSettingsFallsBackWithoutResourceAsset()
         {
             CustomButtonSettings settings = CustomButtonSettings.Global;
