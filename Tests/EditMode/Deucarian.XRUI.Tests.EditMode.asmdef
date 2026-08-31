@@ -3,6 +3,8 @@
   "rootNamespace": "Deucarian.XRUI.Tests",
   "references": [
     "Deucarian.XRUI",
+    "Deucarian.XRUI.Editor",
+    "Deucarian.Editor",
     "Unity.TextMeshPro",
     "UnityEngine.UI"
   ],
