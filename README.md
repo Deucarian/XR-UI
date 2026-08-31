@@ -98,6 +98,7 @@ Works with:
 
 - Unity uGUI, TextMeshPro, Input System, XR Core Utils, and XR Interaction Toolkit.
 - `com.deucarian.common` for approved runtime cleanup.
+- `com.deucarian.editor` for the editor-only Control Center settings contribution.
 
 Optional integrations:
 
