@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Registered XR UI settings and palette actions with Deucarian Control Center and removed their global menu entries.
+
 ## 0.1.1 - 2026-07-17
 
 - Preserved press-gated TMP input-field activation on Unity 2022.3, where `shouldActivateOnSelect` is not yet available.

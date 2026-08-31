@@ -32,21 +32,18 @@ namespace Deucarian.XRUI.Controls.Editor
 
     public static class CustomButtonReplacementEditor
     {
-        private const string MENU_ROOT = "Tools/Deucarian/Experience and Interaction/World Interaction/XR UI/";
         private const string SETTINGS_FOLDER = "Assets/Deucarian/XR UI/Resources";
-        private const string SETTINGS_PATH = SETTINGS_FOLDER + "/CustomButtonSettings.asset";
-        private const string PALETTE_PATH = SETTINGS_FOLDER + "/XrUiColorPalette.asset";
+        internal const string SettingsPath = SETTINGS_FOLDER + "/CustomButtonSettings.asset";
+        internal const string PalettePath = SETTINGS_FOLDER + "/XrUiColorPalette.asset";
 
-        [MenuItem(MENU_ROOT + "Create or Select Global Settings", false, 1)]
         public static CustomButtonSettings CreateOrSelectGlobalSettings()
         {
-            return CreateOrSelectAsset<CustomButtonSettings>(SETTINGS_PATH);
+            return CreateOrSelectAsset<CustomButtonSettings>(SettingsPath);
         }
 
-        [MenuItem(MENU_ROOT + "Create or Select Global Color Palette", false, 2)]
         public static XrUiColorPalette CreateOrSelectGlobalColorPalette()
         {
-            return CreateOrSelectAsset<XrUiColorPalette>(PALETTE_PATH);
+            return CreateOrSelectAsset<XrUiColorPalette>(PalettePath);
         }
 
         private static T CreateOrSelectAsset<T>(string path) where T : ScriptableObject
