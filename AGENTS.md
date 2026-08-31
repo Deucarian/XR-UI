@@ -22,11 +22,12 @@ This package must not own:
 
 Allowed dependency shape:
 
-- May depend on Common for approved runtime cleanup, Unity UI/TextMeshPro/Input System/XR packages for XR-ready controls, and optional integration packages for theme mapping.
+- May depend on Common for approved runtime cleanup, Editor for the Control Center contribution, Unity UI/TextMeshPro/Input System/XR packages for controls, and optional integration packages for theme mapping.
 
 Required dependencies and why:
 
 - `com.deucarian.common`: approved Unity object lifetime helper and shared runtime primitive owner.
+- `com.deucarian.editor`: shared Control Center contracts for project-local XR UI settings.
 - `com.unity.inputsystem`: input primitives used by XR interaction flows.
 - `com.unity.textmeshpro`: TMP dropdown/input support.
 - `com.unity.ugui`: uGUI controls and selectable base classes.
@@ -45,7 +46,7 @@ Architecture exceptions:
 
 - Logging: Do not add diagnostics/logging unless package behavior actually needs it; if needed, use Deucarian Logging and update all metadata together.
 - Common: Use Common-owned cleanup helpers instead of local copies for production Unity object cleanup.
-- Editor UI: Editor code may support this package's inspectors only; do not become the shared editor shell.
+- Editor UI: Inspectors and the narrow Control Center contribution use shared Editor contracts without taking ownership of the shared shell.
 - Diagnostics: Do not become Diagnostics; expose local runtime state only when needed by this package.
 - Testing: Test fixture teardown may use `DestroyImmediate` directly.
 

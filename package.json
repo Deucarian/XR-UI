@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "com.deucarian.common": "0.2.1",
+    "com.deucarian.editor": "1.2.0",
     "com.unity.inputsystem": "1.8.1",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.ugui": "1.0.0",

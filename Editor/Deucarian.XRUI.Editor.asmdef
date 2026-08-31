@@ -3,7 +3,8 @@
   "rootNamespace": "Deucarian.XRUI.Editor",
   "references": [
     "Deucarian.XRUI",
-    "UnityEditor.UI"
+    "UnityEditor.UI",
+    "Deucarian.Editor"
   ],
   "includePlatforms": [
     "Editor"
