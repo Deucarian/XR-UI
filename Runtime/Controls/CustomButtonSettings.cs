@@ -208,10 +208,14 @@ namespace Deucarian.XRUI.Controls
         }
 
         public Color ResolveInteractionColor(ColorBlock colors, CustomButtonVisualState state, bool preserveSelectableColors)
+            => ResolveInteractionColor(colors, state, preserveSelectableColors, XrUiColorPalette.Global);
+
+        public Color ResolveInteractionColor(ColorBlock colors, CustomButtonVisualState state, bool preserveSelectableColors, XrUiColorPalette palette)
         {
+            palette = palette != null ? palette : XrUiColorPalette.Global;
             if (state == CustomButtonVisualState.Disabled)
             {
-                return ColorPalette.DisabledColor;
+                return palette.Disabled;
             }
 
             if (!_usePaletteInteractionTints || preserveSelectableColors)
@@ -226,12 +230,12 @@ namespace Deucarian.XRUI.Controls
             }
 
             if (state == CustomButtonVisualState.Normal &&
-                XrUiColorPalette.TryResolveSemanticColor(colors.normalColor, out XrUiSemanticColor semanticColor))
+                XrUiColorPalette.TryResolveSemanticColor(colors.normalColor, palette, out XrUiSemanticColor semanticColor))
             {
-                return ColorPalette.Palette.GetInteractionColor(state, semanticColor);
+                return palette.GetInteractionColor(state, semanticColor);
             }
 
-            return ColorPalette.Palette.GetInteractionColor(state);
+            return palette.GetInteractionColor(state);
         }
 
         public Color ResolveSocketGhostColor(Color baseColor)
@@ -240,8 +244,11 @@ namespace Deucarian.XRUI.Controls
         }
 
         public Color ResolveSocketGhostColor()
+            => ResolveSocketGhostColor(XrUiColorPalette.Global);
+
+        public Color ResolveSocketGhostColor(XrUiColorPalette palette)
         {
-            Color color = ColorPalette.SocketGhostColor;
+            Color color = (palette != null ? palette : XrUiColorPalette.Global).SocketGhost;
             if (!_usePaletteSocketGhostTint)
             {
                 color = Multiply(color, _socketGhostColorMultiplier);
@@ -483,9 +490,12 @@ namespace Deucarian.XRUI.Controls
         }
 
         public static Color ResolveImageColor(CustomButtonSettings settings, CustomPressableVisualStyle style)
+            => ResolveImageColor(settings, style, XrUiColorPalette.Global);
+
+        public static Color ResolveImageColor(CustomButtonSettings settings, CustomPressableVisualStyle style, XrUiColorPalette palette)
         {
             CustomButtonSettings resolvedSettings = settings != null ? settings : CustomButtonSettings.Global;
-            Color color = resolvedSettings.ResolveSocketGhostColor();
+            Color color = resolvedSettings.ResolveSocketGhostColor(palette);
             if (ResolveSocketSprite(resolvedSettings, style) == null)
             {
                 color.a = 0f;
@@ -689,7 +699,7 @@ namespace Deucarian.XRUI.Controls
                 changed = true;
             }
 
-            Color targetColor = ResolveImageColor(settings, style);
+            Color targetColor = ResolveImageColor(settings, style, XrUiPaletteScope.Resolve(image));
             if (!Approximately(image.color, targetColor))
             {
                 image.color = targetColor;
@@ -802,7 +812,7 @@ namespace Deucarian.XRUI.Controls
                 changed = true;
             }
 
-            Color targetColor = targetSprite != null ? Color.white : ColorPalette.TransparentColor;
+            Color targetColor = targetSprite != null ? Color.white : XrUiPaletteScope.Resolve(image).Transparent;
             if (!Approximately(image.color, targetColor))
             {
                 image.color = targetColor;
@@ -903,7 +913,8 @@ namespace Deucarian.XRUI.Controls
                 changed = true;
             }
 
-            Color targetColor = shouldBeActive ? ColorPalette.OutlineColor : ColorPalette.TransparentColor;
+            XrUiColorPalette palette = XrUiPaletteScope.Resolve(image);
+            Color targetColor = shouldBeActive ? palette.Outline : palette.Transparent;
             if (!Approximately(image.color, targetColor))
             {
                 image.color = targetColor;

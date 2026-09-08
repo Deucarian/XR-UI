@@ -300,8 +300,11 @@ namespace Deucarian.XRUI
         }
 
         public static bool TryResolveSemanticColor(Color color, out XrUiSemanticColor semanticColor)
+            => TryResolveSemanticColor(color, Global, out semanticColor);
+
+        public static bool TryResolveSemanticColor(Color color, XrUiColorPalette palette, out XrUiSemanticColor semanticColor)
         {
-            XrUiColorPalette palette = Global;
+            palette = palette != null ? palette : Global;
             if (TryResolveSemantic(color, DefaultSuccess, palette.Success, XrUiSemanticColor.Success, out semanticColor) ||
                 TryResolveSemantic(color, DefaultDanger, palette.Danger, XrUiSemanticColor.Danger, out semanticColor) ||
                 TryResolveSemantic(color, DefaultWarning, palette.Warning, XrUiSemanticColor.Warning, out semanticColor) ||
@@ -375,7 +378,11 @@ namespace Deucarian.XRUI
             NotifyGlobalPaletteChangedIfNeeded(
                 XrUiColorPaletteRegistry.ClearRuntimePalette());
 
-        private static void NotifyGlobalPaletteChangedIfNeeded(bool paletteChanged)
+        /// <summary>Registers an owner-scoped override. Dispose only removes this registration, never another owner's palette.</summary>
+        public static System.IDisposable RegisterRuntimePalette(XrUiColorPalette palette) =>
+            XrUiColorPaletteRegistry.RegisterRuntimePalette(palette);
+
+        internal static void NotifyGlobalPaletteChangedIfNeeded(bool paletteChanged)
         {
             if (!paletteChanged)
             {
