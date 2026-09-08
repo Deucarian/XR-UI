@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 - Unreleased
+
+- Add explicit palette contexts/scopes and owner-aware fallback registration. Resolve local palettes for graphics, buttons and sliders.
+
 ## Unreleased
 
 - Registered XR UI settings and palette actions with Deucarian Control Center and removed their global menu entries.

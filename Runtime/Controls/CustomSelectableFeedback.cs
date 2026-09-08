@@ -575,7 +575,7 @@ namespace Deucarian.XRUI.Controls
 
         private void UpdateTargetMultiplier()
         {
-            if (!ColorPalette.Palette.UseInteractionStateMultipliers)
+            if (!XrUiPaletteScope.Resolve(this).UseInteractionStateMultipliers)
             {
                 _targetMultiplier = 1f;
                 return;
@@ -653,7 +653,7 @@ namespace Deucarian.XRUI.Controls
             EnsureNeutralColorTargetImages();
 
             Color stateColor = ResolveSelectableColor();
-            Color targetColor = ColorPalette.Palette.UseInteractionStateMultipliers
+            Color targetColor = XrUiPaletteScope.Resolve(this).UseInteractionStateMultipliers
                                         ? stateColor * _currentMultiplier
                                         : stateColor;
             targetColor.a = stateColor.a;
@@ -708,12 +708,12 @@ namespace Deucarian.XRUI.Controls
             CustomButtonVisualState state = ResolveVisualState();
             if (state == CustomButtonVisualState.Disabled)
             {
-                return ColorPalette.DisabledColor;
+                return XrUiPaletteScope.Resolve(this).Disabled;
             }
 
             Color stateColor = _overrideBaseInteractionColor
                                        ? ResolveBaseInteractionColor(state)
-                                       : ResolvedSettings.ResolveInteractionColor(colors, state, false);
+                                       : ResolvedSettings.ResolveInteractionColor(colors, state, false, XrUiPaletteScope.Resolve(this));
             return stateColor;
         }
 
@@ -727,21 +727,21 @@ namespace Deucarian.XRUI.Controls
 
             return state switch
             {
-                    CustomButtonVisualState.Highlighted => ColorPalette.HighlightedColor,
-                    CustomButtonVisualState.Pressed => ColorPalette.PressedColor,
-                    CustomButtonVisualState.Selected => UiButtonTint.Tint(ColorPalette.SelectedColor,
+                    CustomButtonVisualState.Highlighted => XrUiPaletteScope.Resolve(this).GetInteractionColor(CustomButtonVisualState.Highlighted),
+                    CustomButtonVisualState.Pressed => XrUiPaletteScope.Resolve(this).GetInteractionColor(CustomButtonVisualState.Pressed),
+                    CustomButtonVisualState.Selected => UiButtonTint.Tint(XrUiPaletteScope.Resolve(this).GetInteractionColor(CustomButtonVisualState.Selected),
                                                                           ResolveSelectedBoost()),
-                    CustomButtonVisualState.Disabled => ColorPalette.DisabledColor,
+                    CustomButtonVisualState.Disabled => XrUiPaletteScope.Resolve(this).Disabled,
                     _ => baseColor,
             };
         }
 
         private Color ResolveBaseMultiplierInteractionColor(Color baseColor, CustomButtonVisualState state)
         {
-            XrUiColorPalette palette = ColorPalette.Palette;
+            XrUiColorPalette palette = XrUiPaletteScope.Resolve(this);
             if (state == CustomButtonVisualState.Disabled)
             {
-                return ColorPalette.DisabledColor;
+                return XrUiPaletteScope.Resolve(this).Disabled;
             }
 
             Color color = UiButtonTint.Tint(baseColor, palette.GetInteractionMultiplier(state));
@@ -753,20 +753,20 @@ namespace Deucarian.XRUI.Controls
         private Color ResolveCurrentBaseInteractionColor()
         {
             return _hasSemanticBaseInteractionColor
-                           ? ColorPalette.Palette.GetSemanticColor(_baseInteractionSemanticColor)
+                           ? XrUiPaletteScope.Resolve(this).GetSemanticColor(_baseInteractionSemanticColor)
                            : _baseInteractionColor;
         }
 
         private void ResolveBaseInteractionSemantic()
         {
             _hasSemanticBaseInteractionColor = _overrideBaseInteractionColor &&
-                                               XrUiColorPalette.TryResolveSemanticColor(_baseInteractionColor,
+                                               XrUiColorPalette.TryResolveSemanticColor(_baseInteractionColor, XrUiPaletteScope.Resolve(this),
                                                                                             out _baseInteractionSemanticColor);
         }
 
         private float ResolveSelectedBoost()
         {
-            return ColorPalette.Palette.UseInteractionStateMultipliers ? _baseInteractionSelectedBoost : 1f;
+            return XrUiPaletteScope.Resolve(this).UseInteractionStateMultipliers ? _baseInteractionSelectedBoost : 1f;
         }
 
         private void EnsureNeutralColorTargetImages()

@@ -12,11 +12,18 @@ namespace Deucarian.XRUI
         private static XrUiColorPalette _runtimeFallback;
         private static XrUiColorPalette _runtimeOverride;
         private static XrUiColorPalette _resourcesPalette;
+        private static readonly XrUiPaletteContext Context = new XrUiPaletteContext(ResolveFallback);
 
-        public static XrUiColorPalette Global
+        static XrUiColorPaletteRegistry()
         {
-            get
-            {
+            Context.Changed += _ => XrUiColorPalette.NotifyGlobalPaletteChangedIfNeeded(true);
+        }
+
+        public static System.IDisposable RegisterRuntimePalette(XrUiColorPalette palette) => Context.Register(palette);
+        public static XrUiColorPalette Global => Context.Current;
+
+        private static XrUiColorPalette ResolveFallback()
+        {
                 if (_runtimeOverride != null)
                 {
                     return _runtimeOverride;
@@ -39,7 +46,6 @@ namespace Deucarian.XRUI
                 }
 
                 return _runtimeFallback;
-            }
         }
 
         public static bool SetRuntimePalette(XrUiColorPalette palette)
@@ -49,8 +55,9 @@ namespace Deucarian.XRUI
                 return false;
             }
 
+            var previous = Global;
             _runtimeOverride = palette;
-            return true;
+            return previous != Global;
         }
 
         public static bool ClearRuntimePalette()
@@ -60,8 +67,9 @@ namespace Deucarian.XRUI
                 return false;
             }
 
+            var previous = Global;
             _runtimeOverride = null;
-            return true;
+            return previous != Global;
         }
     }
 }

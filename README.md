@@ -8,7 +8,7 @@ The core package has neutral built-in colors and settings. Install `com.deucaria
 
 Package ID: `com.deucarian.xr-ui`
 
-Current package version: `0.1.1`.
+Current package version: `0.2.0`.
 
 ## When to use it
 
