@@ -133,7 +133,7 @@ namespace Deucarian.XRUI.Controls
             }
 
             var image = gameObject.AddComponent<Image>();
-            image.color = ColorPalette.BackgroundColor;
+            image.color = XrUiPaletteScope.Resolve(this).Background;
             return image;
         }
     }

@@ -11,6 +11,7 @@ namespace Deucarian.XRUI
         [SerializeField] private Graphic _target;
         [SerializeField] private XrUiSemanticColor _semanticColor = XrUiSemanticColor.BodyText;
         [SerializeField] private bool _preserveAlpha;
+        private XrUiColorPalette _appliedPalette;
 
         public Graphic Target => ResolveTarget();
         public XrUiSemanticColor SemanticColor => _semanticColor;
@@ -23,7 +24,15 @@ namespace Deucarian.XRUI
             ApplyPaletteColor();
         }
 
-        public void ApplyPaletteColor() => ApplyPaletteColor(XrUiColorPalette.Global);
+        public void ApplyPaletteColor() => ApplyResolvedPaletteColor(XrUiPaletteScope.Resolve(this));
+
+        private void OnTransformParentChanged() => ApplyPaletteColor();
+
+        private void LateUpdate()
+        {
+            XrUiColorPalette resolved = XrUiPaletteScope.Resolve(this);
+            if (resolved != _appliedPalette) ApplyResolvedPaletteColor(resolved);
+        }
 
         private void Reset()
         {
@@ -63,6 +72,12 @@ namespace Deucarian.XRUI
 
         private void ApplyPaletteColor(XrUiColorPalette palette)
         {
+            ApplyPaletteColor();
+        }
+
+        private void ApplyResolvedPaletteColor(XrUiColorPalette palette)
+        {
+            _appliedPalette = palette;
             Graphic target = ResolveTarget();
             if (target == null || palette == null)
             {

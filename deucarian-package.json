@@ -16,7 +16,8 @@
     "Deucarian.XRUI.Samples.SpatialKeyboardAdapter"
   ],
   "testAssemblies": [
-    "Deucarian.XRUI.Tests.EditMode"
+    "Deucarian.XRUI.Tests.EditMode",
+    "Deucarian.XRUI.Tests.PlayMode"
   ],
   "requiredDependencies": [
     "com.deucarian.common",
