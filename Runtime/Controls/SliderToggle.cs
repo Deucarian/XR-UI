@@ -182,7 +182,7 @@ namespace Deucarian.XRUI.Controls
 
             _slider.interactable = false;
             ColorBlock sliderColors = _slider.colors;
-            sliderColors.disabledColor = ColorPalette.ImageColor;
+            sliderColors.disabledColor = XrUiPaletteScope.Resolve(this).Image;
             _slider.colors = sliderColors;
             _slider.transition = Selectable.Transition.None;
 
@@ -235,7 +235,7 @@ namespace Deucarian.XRUI.Controls
                 return;
             }
 
-            Color baseColor = Color.Lerp(ColorPalette.ImageColor, ColorPalette.PrimaryColor, value);
+            Color baseColor = Color.Lerp(XrUiPaletteScope.Resolve(this).Image, XrUiPaletteScope.Resolve(this).Primary, value);
             if (_selectableFeedback == null)
             {
                 _selectableFeedback = GetComponent<CustomSelectableFeedback>();
@@ -272,7 +272,7 @@ namespace Deucarian.XRUI.Controls
                    Mathf.Abs(a.a - b.a) <= tolerance;
         }
 
-        private void ApplySliderPalette()
+        public void ApplySliderPalette()
         {
             SetupSliderComponent();
             UpdateHandleColor(_sliderValue);

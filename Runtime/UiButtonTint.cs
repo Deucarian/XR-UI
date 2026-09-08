@@ -38,13 +38,13 @@ namespace Deucarian.XRUI
 
             ColorBlock cb = target.colors;
             cb.colorMultiplier = 1f;
-            float resolvedSelectedBoost = ColorPalette.Palette.UseInteractionStateMultipliers ? selectedBoost : 1f;
+            float resolvedSelectedBoost = XrUiPaletteScope.Resolve(target).UseInteractionStateMultipliers ? selectedBoost : 1f;
 
             cb.normalColor = baseColor;
-            cb.highlightedColor = ColorPalette.HighlightedColor;
-            cb.pressedColor = ColorPalette.PressedColor;
-            cb.selectedColor = Tint(ColorPalette.SelectedColor, resolvedSelectedBoost);
-            cb.disabledColor = ColorPalette.DisabledColor;
+            cb.highlightedColor = XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Highlighted);
+            cb.pressedColor = XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Pressed);
+            cb.selectedColor = Tint(XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Selected), resolvedSelectedBoost);
+            cb.disabledColor = XrUiPaletteScope.Resolve(target).Disabled;
 
             target.colors = cb;
         }
@@ -75,7 +75,7 @@ namespace Deucarian.XRUI
                 target.targetGraphic.color = Color.white;
             }
 
-            XrUiColorPalette palette = ColorPalette.Palette;
+            XrUiColorPalette palette = XrUiPaletteScope.Resolve(target);
             ColorBlock cb = target.colors;
             cb.colorMultiplier = 1f;
             float resolvedSelectedBoost = palette.UseInteractionStateMultipliers ? selectedBoost : 1f;
@@ -85,7 +85,7 @@ namespace Deucarian.XRUI
             cb.pressedColor = Tint(baseColor, palette.GetInteractionMultiplier(CustomButtonVisualState.Pressed));
             cb.selectedColor = Tint(Tint(baseColor, palette.GetInteractionMultiplier(CustomButtonVisualState.Selected)),
                                     resolvedSelectedBoost);
-            cb.disabledColor = ColorPalette.DisabledColor;
+            cb.disabledColor = XrUiPaletteScope.Resolve(target).Disabled;
 
             target.colors = cb;
         }
