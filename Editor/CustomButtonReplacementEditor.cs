@@ -1,3 +1,4 @@
+using Deucarian.Editor;
 #if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
@@ -18,13 +19,18 @@ namespace Deucarian.XRUI.Controls.Editor
             _onButtonClick = serializedObject.FindProperty("_onButtonClick");
         }
 
+        public override UnityEngine.UIElements.VisualElement CreateInspectorGUI() =>
+
+            DeucarianEditorInspector.Create(OnInspectorGUI);
+
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
             serializedObject.Update();
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Custom Button", EditorStyles.boldLabel);
+            DeucarianEditorTextGUI.LabelField("Custom Button", DeucarianEditorWorkbenchGUI.BoldLabelStyle);
             EditorGUILayout.PropertyField(_onButtonClick);
             serializedObject.ApplyModifiedProperties();
         }
