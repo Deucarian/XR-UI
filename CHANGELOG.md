@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 2026-09-09
+
+- Register package tooling and navigation actions as shared Control Center pages. Preserve the domain workflow while using Editor-owned submenus, in-window navigation, and UI scaling.
+
 ## 0.2.0 - Unreleased
 
 - Add explicit palette contexts/scopes and owner-aware fallback registration. Resolve local palettes for graphics, buttons and sliders.
