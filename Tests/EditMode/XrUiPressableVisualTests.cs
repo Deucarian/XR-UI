@@ -55,9 +55,14 @@ namespace Deucarian.XRUI.Tests
             Assert.That(Configure(layer, image, style), Is.False);
             image.overrideSprite = overrideMatchesBaseSprite ? sprite : replacement;
 
-            Assert.That(Configure(layer, image, style), Is.True, "Edit mode reports clearing a stored override.");
+            bool overrideIsSerialized;
             using (var serialized = new SerializedObject(image))
-                Assert.That(serialized.FindProperty("m_OverrideSprite").objectReferenceValue, Is.Null);
+                overrideIsSerialized = serialized.FindProperty("m_OverrideSprite") != null;
+            Assert.That(Configure(layer, image, style), Is.EqualTo(overrideIsSerialized),
+                "Preserve change reporting for both serialized and nonserialized UGUI override slots.");
+            FieldInfo overrideField = typeof(Image).GetField("m_OverrideSprite", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(overrideField, Is.Not.Null);
+            Assert.That(overrideField.GetValue(image), Is.Null, "Clear even an override that matches the base sprite.");
             Assert.That(image.sprite, Is.SameAs(sprite));
             Assert.That(image.overrideSprite, Is.SameAs(sprite), "Unity exposes the base sprite when no override remains.");
             Assert.That(Configure(layer, image, style), Is.False);
