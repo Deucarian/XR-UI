@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.2] - 2026-09-10
+
+### Changed
+
+- Adopt the shared Editor 1.7 workspace presentation: neutral surfaces, readable typography, consistent actions and aligned controls.
+- Preserve package workflows and native serialized editing.
+- Separate managed visual sprite-override handling from socket styling, retaining public APIs, serialized settings, and existing Edit Mode/Play Mode behavior. Keep each extracted source file below the 500-line review limit.
+
+## [0.2.1] - 2026-09-09
+
+- Register package tooling and navigation actions as shared Control Center pages. Preserve the domain workflow while using Editor-owned submenus, in-window navigation, and UI scaling.
+
 ## 0.2.0 - Unreleased
 
 - Add explicit palette contexts/scopes and owner-aware fallback registration. Resolve local palettes for graphics, buttons and sliders.
