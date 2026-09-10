@@ -22,10 +22,10 @@ namespace Deucarian.XRUI.Controls.Editor
                 searchTerms: new[] { "xr", "ui", "settings", "palette" },
                 order: 320, createPage: () => DeucarianEditorImGuiPage.Create(ToolId, () =>
                 {
-                    EditorGUILayout.HelpBox("Create or select project-local XR UI settings and palette assets.", MessageType.Info);
-                    if (UnityEngine.GUILayout.Button("Create or select settings"))
+                    DeucarianEditorTextGUI.HelpBox("Create or select project-local XR UI settings and palette assets.", MessageType.Info);
+                    if (DeucarianEditorActionGUI.Button("Create or select settings"))
                         CustomButtonReplacementEditor.CreateOrSelectGlobalSettings();
-                    if (UnityEngine.GUILayout.Button("Create or select palette"))
+                    if (DeucarianEditorActionGUI.Button("Create or select palette"))
                         CustomButtonReplacementEditor.CreateOrSelectGlobalColorPalette();
                 })));
             DeucarianControlCenterRegistry.RegisterCardProvider(new Provider());
