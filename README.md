@@ -8,7 +8,12 @@ The core package has neutral built-in colors and settings. Install `com.deucaria
 
 Package ID: `com.deucarian.xr-ui`
 
-Current package version: `0.2.3`.
+Current package version: `0.3.0`.
+
+Author new application palettes in Theming and install the optional XR UI
+Theming Integration to map them into a local palette scope. The XR UI settings
+page links to that workflow. Existing XR palette assets remain compatibility
+fallbacks; they are not another required brand-authoring step.
 
 ## When to use it
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2026-09-11
+
+- Direct new visual palette authoring to Theming; keep existing XR palette assets under a clearly labeled compatibility fallback.
+- Accept fully resolved interaction state colors so theme-owned pressed and selected colors remain independent and are not multiplied twice.
+
 ## [0.2.3] - 2026-09-11
 
 - Use native XR settings and custom button Inspectors with shared controls, isolated preview and existing serialized/animation behavior.

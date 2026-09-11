@@ -1,6 +1,6 @@
 {
   "name": "com.deucarian.xr-ui",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "displayName": "Deucarian XR UI",
   "description": "Standalone XR-ready uGUI pressable controls, world canvas helpers, poke affordances, and neutral visual settings.",
   "unity": "2022.3",

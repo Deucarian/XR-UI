@@ -24,7 +24,7 @@ namespace Deucarian.XRUI.Controls.Editor
             var root = new VisualElement();
             workspace = new DeucarianEditorWorkspace(root, Application.productName);
             workspace.Title.text = "XR UI";
-            workspace.Subtitle.text = "Set up the shared controls for your XR app.";
+            workspace.Subtitle.text = "Configure XR controls and connect their appearance to Theming.";
             DeucarianEditorWorkspaceNavigation.Populate(workspace, "deucarian.xr-ui.settings");
             Page = new DeucarianEditorPage(root, activate: Activate, dispose: Dispose);
             Render();
@@ -53,9 +53,17 @@ namespace Deucarian.XRUI.Controls.Editor
             var cards = new VisualElement();
             BuildAsset(cards, "xr-controls", "UI settings", "Configure the shared XR UI behavior.",
                 DeucarianEditorIconIds.Package, settings, () => CustomButtonReplacementEditor.CreateOrSelectGlobalSettings());
-            BuildAsset(cards, "xr-palette", "Palette", "Choose the colors and styling for XR UI.",
-                DeucarianEditorIconIds.Palette, palette, () => CustomButtonReplacementEditor.CreateOrSelectGlobalColorPalette());
+            var theming = new DeucarianEditorFeatureSection("xr-theming", "Visual styling",
+                "Author palettes in Theming. The XR UI Theming Integration maps them to your controls.", DeucarianEditorIconIds.Palette);
+            cards.Add(theming.Root);
+            bool hasTheming = DeucarianToolRegistry.TryGet(DeucarianToolIds.ThemeManager, out _);
+            theming.SetState(true);
+            var openTheming = Ui.Button(hasTheming ? "Open Theming" : "Install Theming integration", () =>
+                DeucarianEditorNavigation.Open(Page.Root, hasTheming ? "deucarian.theming.project-setup" : DeucarianToolIds.PackageInstaller));
+            theming.Actions.Add(openTheming);
+            theming.Details.Add(Ui.Label("Add a theme bridge and palette scope to the XR UI root. Existing authored palettes remain a fallback.", "dw-muted"));
             var preview = new VisualElement();
+            preview.Add(Ui.Label("Fallback control preview", "dw-section-title"));
             specimen = new DeucarianEditorControlSpecimen();
             if (palette != null) specimen.SetColors(palette.Background, palette.Primary, palette.BodyText);
             preview.Add(specimen);
@@ -68,7 +76,14 @@ namespace Deucarian.XRUI.Controls.Editor
             scroll.Add(actions);
             if (!showSettings) return;
             if (settings != null) AddSettings(scroll, "Control behavior", settings);
-            if (palette != null) AddSettings(scroll, "Palette colors", palette);
+            if (palette != null)
+            {
+                var legacy = new Foldout { text = "Legacy palette fallback", value = false };
+                legacy.AddToClassList("dw-foldout");
+                scroll.Add(legacy);
+                legacy.Add(Ui.Label("Used only without a theme bridge. Keep existing assets for compatibility; new colors belong in Theming.", "dw-muted"));
+                AddSettings(legacy, "Authored fallback", palette);
+            }
         }
 
         private void BuildAsset(VisualElement parent, string id, string title, string description,

@@ -133,6 +133,15 @@ namespace Deucarian.XRUI
         [SerializeField] [Range(0f, 2f)] private float _selectedMultiplier = 1f;
         [SerializeField] [Range(0f, 2f)] private float _disabledMultiplier = 1f;
 
+        private XrUiInteractionColors? resolvedInteractionColors;
+
+        /// <summary>Supplies fully resolved state colors from an external theme, without changing authored multiplier settings.</summary>
+        public void SetResolvedInteractionColors(Color normal, Color highlighted, Color pressed, Color selected, Color disabled)
+        {
+            resolvedInteractionColors = new XrUiInteractionColors(normal, highlighted, pressed, selected, disabled);
+            NotifyPaletteChanged();
+        }
+
         public Color Normal { get => GetInteractionColor(CustomButtonVisualState.Normal); set => Background = value; }
         public Color Highlighted { get => GetInteractionColor(CustomButtonVisualState.Highlighted); set { Secondary = value; HighlightedMultiplier = 1f; } }
         public Color Pressed { get => GetInteractionColor(CustomButtonVisualState.Pressed); set { Primary = value; PressedMultiplier = 1f; } }
@@ -281,22 +290,15 @@ namespace Deucarian.XRUI
             return GetInteractionColor(state, XrUiSemanticColor.Background);
         }
 
+        /// <summary>Resolves authored semantic colors and multipliers without transient theme-state overrides.</summary>
+        public Color GetAuthoredInteractionColor(CustomButtonVisualState state) =>
+            XrUiInteractionColors.ResolveLegacy(this, state, XrUiSemanticColor.Background);
+
         public Color GetInteractionColor(CustomButtonVisualState state, XrUiSemanticColor normalSemantic)
         {
-            if (state == CustomButtonVisualState.Disabled)
-            {
-                return Disabled;
-            }
-
-            XrUiSemanticColor semantic = state switch
-            {
-                CustomButtonVisualState.Highlighted => XrUiSemanticColor.Secondary,
-                CustomButtonVisualState.Pressed => XrUiSemanticColor.Primary,
-                CustomButtonVisualState.Selected => XrUiSemanticColor.Primary,
-                _ => normalSemantic,
-            };
-
-            return Tint(GetSemanticColor(semantic), GetInteractionMultiplier(state));
+            return resolvedInteractionColors.HasValue
+                ? resolvedInteractionColors.Value.Resolve(this, state, normalSemantic)
+                : XrUiInteractionColors.ResolveLegacy(this, state, normalSemantic);
         }
 
         public static bool TryResolveSemanticColor(Color color, out XrUiSemanticColor semanticColor)
@@ -439,14 +441,6 @@ namespace Deucarian.XRUI
             _selectedMultiplier = Mathf.Clamp(_selectedMultiplier, 0f, 2f);
             _disabledMultiplier = Mathf.Clamp(_disabledMultiplier, 0f, 2f);
             NotifyPaletteChanged();
-        }
-
-        private static Color Tint(Color color, float multiplier)
-        {
-            return new Color(Mathf.Clamp01(color.r * multiplier),
-                             Mathf.Clamp01(color.g * multiplier),
-                             Mathf.Clamp01(color.b * multiplier),
-                             color.a);
         }
 
         private static bool IsNearSemantic(Color color, Color defaultColor, Color paletteColor)
