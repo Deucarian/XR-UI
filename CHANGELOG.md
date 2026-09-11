@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+- Wire the Pressable Controls sample with a camera, world canvas, real slider/dropdown geometry, persistent events and status feedback.
+- Retain the code-created sample path and use the supported built-in font on current Unity versions.
+
 ## [0.3.0] - 2026-09-11
 
 - Direct new visual palette authoring to Theming; keep existing XR palette assets under a clearly labeled compatibility fallback.
