@@ -33,9 +33,7 @@ namespace Deucarian.XRUI.Tests
                 candidate.Id == "com.deucarian.xr-ui.experience");
             bool complete =
                 AssetDatabase.LoadAssetAtPath<CustomButtonSettings>(
-                    "Assets/Deucarian/XR UI/Resources/CustomButtonSettings.asset") != null &&
-                AssetDatabase.LoadAssetAtPath<XrUiColorPalette>(
-                    "Assets/Deucarian/XR UI/Resources/XrUiColorPalette.asset") != null;
+                    "Assets/Deucarian/XR UI/Resources/CustomButtonSettings.asset") != null;
 
             Assert.That(tool.Area, Is.EqualTo(DeucarianControlCenterArea.Experience));
             Assert.That(card.Area, Is.EqualTo(DeucarianControlCenterArea.Experience));
@@ -47,6 +45,9 @@ namespace Deucarian.XRUI.Tests
             CollectionAssert.AreEqual(
                 new[] { "settings", "palette" },
                 card.Actions.Select(action => action.Id).ToArray());
+            Assert.That(card.Actions.Single(action => action.Id == "palette").NavigationToolId,
+                Is.EqualTo(DeucarianToolRegistry.TryGet("deucarian.theming.project-setup", out _)
+                    ? "deucarian.theming.project-setup" : DeucarianToolIds.PackageInstaller));
         }
     }
 }
