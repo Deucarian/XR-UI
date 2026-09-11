@@ -3,11 +3,25 @@ using Deucarian.Editor;
 using Deucarian.XRUI.Controls;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Deucarian.XRUI.Tests
 {
     public sealed class XrUiControlCenterTests
     {
+        [Test]
+        public void ReturningToUnchangedSettingsRetainsTheWorkingView()
+        {
+            Assert.IsTrue(DeucarianToolRegistry.TryGet("deucarian.xr-ui.settings", out var tool));
+            using (var page = tool.CreatePage())
+            {
+                page.Activate("settings");
+                var content = page.Root.Q("xr-ui-settings");
+                page.Deactivate(); page.Activate(null); page.Activate("settings");
+                Assert.AreSame(content, page.Root.Q("xr-ui-settings"));
+            }
+        }
+
         [Test]
         public void ContributionUsesCanonicalAssetsAndStableExperienceActions()
         {

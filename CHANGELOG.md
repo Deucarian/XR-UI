@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.3] - 2026-09-11
+
+- Use native XR settings and custom button Inspectors with shared controls, isolated preview and existing serialized/animation behavior.
+- Require Editor 1.10.6 for the shared native controls, typography, responsive layouts and accessible interaction states.
+
 ## [0.2.2] - 2026-09-10
 
 ### Changed
