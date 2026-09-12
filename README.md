@@ -1,5 +1,9 @@
 # Deucarian XR UI
 
+## Asset selection and project defaults
+
+XR UI shows the effective global button settings even when no project override exists. Built-in settings are read-only; Create makes the canonical Resources asset already used by the runtime. The field intentionally does not select arbitrary settings assets, because that would not change the runtime's global binding. Visual theme ownership remains in Theming; legacy XR palettes remain compatibility fallback only.
+
 ## What this is
 
 Deucarian XR UI provides standalone XR-ready uGUI controls for Deucarian Unity projects. The package centers on press-gated controls: hover and proximity can show feedback, but activation happens only after the configured press depth is reached.

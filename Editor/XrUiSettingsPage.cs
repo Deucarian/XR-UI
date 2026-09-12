@@ -92,18 +92,12 @@ namespace Deucarian.XRUI.Controls.Editor
             var card = new DeucarianEditorFeatureSection(id, title, description, icon);
             card.Root.AddToClassList("dw-feature-settings");
             parent.Add(card.Root);
-            if (asset == null)
-            {
-                card.Details.Add(Ui.Label("No project asset yet. Package defaults are in use.", "dw-muted"));
-                card.Actions.Add(Ui.Button("Create project asset", () => { create(); Render(); }));
-                card.SetState(true);
-                return;
-            }
-            var field = new ObjectField { objectType = asset.GetType(), allowSceneObjects = false, value = asset };
-            field.SetEnabled(false);
-            var controls = Ui.Actions(field, Ui.Button("Select", () => { Selection.activeObject = asset; EditorGUIUtility.PingObject(asset); }));
-            controls.AddToClassList("dw-asset-actions");
-            card.Details.Add(Ui.Field(id == "xr-controls" ? "Settings asset" : "Palette asset", controls));
+            var resolved = asset != null ? asset : CustomButtonSettings.Global;
+            var field = new DeucarianEditorAssetField(id + "-settings", resolved.GetType(), () => resolved,
+                _ => Render(), create: asset == null ? create : null, allowSelection: false);
+            card.Details.Add(Ui.Field("Settings asset", field.Root));
+            card.Details.Add(Ui.Label(asset == null ? "Built-in runtime defaults · Create a project asset to customize shared controls."
+                : "Shared controls load this project resource automatically.", "dw-muted"));
             card.SetState(true);
         }
 

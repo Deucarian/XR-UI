@@ -1,5 +1,9 @@
 # Changelog
 
+## Asset workflow — Unreleased
+
+- Display the effective global button-settings fallback and offer explicit canonical project-asset creation through the shared asset control.
+
 ## [Unreleased]
 
 - Wire the Pressable Controls sample with a camera, world canvas, real slider/dropdown geometry, persistent events and status feedback.
