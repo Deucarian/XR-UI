@@ -2,6 +2,7 @@
   "name": "Deucarian.XRUI",
   "rootNamespace": "Deucarian.XRUI",
   "references": [
+    "Deucarian.Theming",
     "Deucarian.Common",
     "Unity.InputSystem",
     "Unity.TextMeshPro",

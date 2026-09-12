@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.0] - 2026-09-12
+
+- Delegate compatibility defaults and color math to Theming. Preserve serialized palette values, physical press, socket, selection and click behavior.
+
 ## Asset workflow — Unreleased
 
 - Display the effective global button-settings fallback and offer explicit canonical project-asset creation through the shared asset control.

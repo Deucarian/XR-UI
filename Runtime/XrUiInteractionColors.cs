@@ -34,8 +34,7 @@ namespace Deucarian.XRUI
             };
             Color color = palette.GetSemanticColor(role);
             float multiplier = palette.GetInteractionMultiplier(state);
-            return new Color(Mathf.Clamp01(color.r * multiplier), Mathf.Clamp01(color.g * multiplier),
-                Mathf.Clamp01(color.b * multiplier), color.a);
+            return Deucarian.Theming.DeucarianControlColorMath.Tint(color, multiplier);
         }
     }
 }

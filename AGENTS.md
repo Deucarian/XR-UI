@@ -27,6 +27,7 @@ Allowed dependency shape:
 Required dependencies and why:
 
 - `com.deucarian.common`: approved Unity object lifetime helper and shared runtime primitive owner.
+- `com.deucarian.theming`: shared color composition and exact compatibility defaults; XR UI retains serialized adapters and physical control styling.
 - `com.deucarian.editor`: shared Control Center contracts for project-local XR UI settings.
 - `com.unity.inputsystem`: input primitives used by XR interaction flows.
 - `com.unity.textmeshpro`: TMP dropdown/input support.
