@@ -20,6 +20,7 @@
     "Deucarian.XRUI.Tests.PlayMode"
   ],
   "requiredDependencies": [
+    "com.deucarian.theming",
     "com.deucarian.common",
     "com.deucarian.editor",
     "com.unity.inputsystem",

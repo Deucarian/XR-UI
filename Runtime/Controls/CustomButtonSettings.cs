@@ -379,10 +379,7 @@ namespace Deucarian.XRUI.Controls
             return _genericButtonStyle;
         }
 
-        private static Color Multiply(Color a, Color b) => new(a.r * b.r,
-                                                               a.g * b.g,
-                                                               a.b * b.b,
-                                                               a.a * b.a);
+        private static Color Multiply(Color a, Color b) => Deucarian.Theming.DeucarianControlColorMath.Multiply(a, b);
 
         internal static Vector4 ClampNonNegative(Vector4 value)
         {

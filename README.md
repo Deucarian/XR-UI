@@ -12,7 +12,12 @@ The core package has neutral built-in colors and settings. Install `com.deucaria
 
 Package ID: `com.deucarian.xr-ui`
 
-Current package version: `0.3.0`.
+Current package version: `0.4.0`.
+
+Theming owns shared color composition and compatibility color defaults. Existing
+XR palette assets and their serialized fields remain readable; they are adapters
+for old content, not a second source for authoring new themes. Physical press,
+socket geometry, hit areas, activation thresholds and motion remain XR UI-owned.
 
 Author new application palettes in Theming and install the optional XR UI
 Theming Integration to map them into a local palette scope. The XR UI settings
