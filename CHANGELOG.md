@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.4.0] - 2026-09-12
+
+- Delegate compatibility defaults and color math to Theming. Preserve serialized palette values, physical press, socket, selection and click behavior.
+
+## Asset workflow — Unreleased
+
+- Display the effective global button-settings fallback and offer explicit canonical project-asset creation through the shared asset control.
+
+## [Unreleased]
+
+- Wire the Pressable Controls sample with a camera, world canvas, real slider/dropdown geometry, persistent events and status feedback.
+- Retain the code-created sample path and use the supported built-in font on current Unity versions.
+
+## [0.3.0] - 2026-09-11
+
+- Direct new visual palette authoring to Theming; keep existing XR palette assets under a clearly labeled compatibility fallback.
+- Accept fully resolved interaction state colors so theme-owned pressed and selected colors remain independent and are not multiplied twice.
+
+## [0.2.3] - 2026-09-11
+
+- Use native XR settings and custom button Inspectors with shared controls, isolated preview and existing serialized/animation behavior.
+- Require Editor 1.10.6 for the shared native controls, typography, responsive layouts and accessible interaction states.
+
 ## [0.2.2] - 2026-09-10
 
 ### Changed

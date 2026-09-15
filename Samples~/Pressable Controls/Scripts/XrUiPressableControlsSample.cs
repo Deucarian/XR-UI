@@ -7,16 +7,25 @@ using UnityEngine.UI;
 public sealed class XrUiPressableControlsSample : MonoBehaviour
 {
     [SerializeField] private Font font;
+    [SerializeField] private Canvas authoredCanvas;
+    [SerializeField] private Text status;
     private int _buttonPressCount;
 
     private void Start()
     {
+        if (authoredCanvas != null) { UpdateStatus("Hover, press, toggle or drag a control."); return; }
         Canvas canvas = CreateCanvas();
         CreateButton(canvas.transform, "Button", new Vector2(0f, 90f));
         CreateToggle(canvas.transform, "Toggle", new Vector2(0f, 30f));
         CreateSlider(canvas.transform, new Vector2(0f, -30f));
         CreateDropdown(canvas.transform, new Vector2(0f, -90f));
     }
+
+    public void CountPress() => UpdateStatus("Button presses: " + ++_buttonPressCount);
+    public void ShowToggle(bool value) => UpdateStatus("Toggle: " + (value ? "on" : "off"));
+    public void ShowSlider(float value) => UpdateStatus("Slider: " + value.ToString("0.00"));
+    public void ShowChoice(int value) => UpdateStatus("Choice: " + (value + 1));
+    private void UpdateStatus(string value) { if (status != null) status.text = value; }
 
     private Canvas CreateCanvas()
     {
@@ -95,7 +104,11 @@ public sealed class XrUiPressableControlsSample : MonoBehaviour
         label.text = text;
         label.alignment = TextAnchor.MiddleCenter;
         label.color = ColorPalette.BodyTextColor;
+#if UNITY_2022_2_OR_NEWER
+        label.font = font != null ? font : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+#else
         label.font = font != null ? font : Resources.GetBuiltinResource<Font>("Arial.ttf");
+#endif
         label.raycastTarget = false;
     }
 }

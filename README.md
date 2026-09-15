@@ -1,5 +1,9 @@
 # Deucarian XR UI
 
+## Asset selection and project defaults
+
+XR UI shows the effective global button settings even when no project override exists. Built-in settings are read-only; Create makes the canonical Resources asset already used by the runtime. The field intentionally does not select arbitrary settings assets, because that would not change the runtime's global binding. Visual theme ownership remains in Theming; legacy XR palettes remain compatibility fallback only.
+
 ## What this is
 
 Deucarian XR UI provides standalone XR-ready uGUI controls for Deucarian Unity projects. The package centers on press-gated controls: hover and proximity can show feedback, but activation happens only after the configured press depth is reached.
@@ -8,7 +12,17 @@ The core package has neutral built-in colors and settings. Install `com.deucaria
 
 Package ID: `com.deucarian.xr-ui`
 
-Current package version: `0.2.2`.
+Current package version: `0.4.0`.
+
+Theming owns shared color composition and compatibility color defaults. Existing
+XR palette assets and their serialized fields remain readable; they are adapters
+for old content, not a second source for authoring new themes. Physical press,
+socket geometry, hit areas, activation thresholds and motion remain XR UI-owned.
+
+Author new application palettes in Theming and install the optional XR UI
+Theming Integration to map them into a local palette scope. The XR UI settings
+page links to that workflow. Existing XR palette assets remain compatibility
+fallbacks; they are not another required brand-authoring step.
 
 ## When to use it
 

@@ -50,39 +50,39 @@ namespace Deucarian.XRUI
         private const float SemanticColorMatchTolerance = 0.08f;
         private const float SemanticAlphaMatchTolerance = 0.02f;
 
-        public static readonly Color DefaultSuccess = new(0.33f, 0.48f, 0.34f, 1f);
-        public static readonly Color DefaultDanger = new(0.62f, 0.17f, 0.27f, 1f);
-        public static readonly Color DefaultWarning = new(1f, 0.59f, 0f, 1f);
-        public static readonly Color DefaultInfo = new(0.3f, 0.7f, 1f, 1f);
-        public static readonly Color DefaultPrimary = new(0.77f, 0.63f, 0.98f, 1f);
-        public static readonly Color DefaultSecondary = new(0.47f, 0.39f, 0.6f, 1f);
-        public static readonly Color DefaultBackground = new(0.22f, 0.23f, 0.23f, 1f);
-        public static readonly Color DefaultDisabled = new(0.8f, 0.8f, 0.8f, 1f);
-        public static readonly Color DefaultSocketGhost = Color.white;
-        public static readonly Color DefaultTitleText = new(0.77f, 0.63f, 0.98f, 1f);
-        public static readonly Color DefaultBodyText = Color.white;
-        public static readonly Color DefaultSmallText = new(0.76f, 0.76f, 0.77f, 1f);
-        public static readonly Color DefaultMutedText = new(1f, 1f, 1f, 0.5f);
-        public static readonly Color DefaultInputText = new(0.75f, 0.75f, 0.75f, 1f);
-        public static readonly Color DefaultPlaceholderText = new(0.75f, 0.75f, 0.75f, 0.47f);
-        public static readonly Color DefaultIcon = Color.white;
-        public static readonly Color DefaultImage = Color.white;
-        public static readonly Color DefaultImageMuted = new(0.75f, 0.75f, 0.75f, 1f);
-        public static readonly Color DefaultImageSubtle = new(1f, 1f, 1f, 0.15f);
-        public static readonly Color DefaultSliderTrack = new(0.4f, 0.4f, 0.4f, 1f);
-        public static readonly Color DefaultOutline = Color.white;
-        public static readonly Color DefaultErrorText = new(1f, 0.46f, 0.46f, 1f);
-        public static readonly Color DefaultKeyboardAccent = new(0.13f, 0.59f, 0.95f, 1f);
-        public static readonly Color DefaultKeyboardBackground = new(0.13f, 0.13f, 0.13f, 1f);
-        public static readonly Color DefaultKeyboardOutline = new(0f, 0.6f, 1f, 1f);
-        public static readonly Color DefaultKeyboardInputText = new(0.59f, 0.59f, 0.59f, 1f);
-        public static readonly Color DefaultControlSubtleBackground = new(1f, 1f, 1f, 0.05f);
-        public static readonly Color DefaultControlDarkBorder = new(0f, 0f, 0f, 0.48f);
-        public static readonly Color DefaultSliderHandle = new(0.39f, 0.26f, 0.59f, 1f);
-        public static readonly Color DefaultLoadingIndicator = new(0.47f, 0.47f, 0.47f, 1f);
-        public static readonly Color DefaultDropdownInvalidState = new(1f, 0f, 0f, 1f);
-        public static readonly Color DefaultKeyboardContentAccent = new(0.1f, 1f, 0f, 1f);
-        public static readonly Color DefaultTransparent = new(1f, 1f, 1f, 0f);
+        public static readonly Color DefaultSuccess = Deucarian.Theming.DeucarianLegacyControlColors.Success;
+        public static readonly Color DefaultDanger = Deucarian.Theming.DeucarianLegacyControlColors.Danger;
+        public static readonly Color DefaultWarning = Deucarian.Theming.DeucarianLegacyControlColors.Warning;
+        public static readonly Color DefaultInfo = Deucarian.Theming.DeucarianLegacyControlColors.Info;
+        public static readonly Color DefaultPrimary = Deucarian.Theming.DeucarianLegacyControlColors.Primary;
+        public static readonly Color DefaultSecondary = Deucarian.Theming.DeucarianLegacyControlColors.Secondary;
+        public static readonly Color DefaultBackground = Deucarian.Theming.DeucarianLegacyControlColors.Background;
+        public static readonly Color DefaultDisabled = Deucarian.Theming.DeucarianLegacyControlColors.Disabled;
+        public static readonly Color DefaultSocketGhost = Deucarian.Theming.DeucarianLegacyControlColors.SocketGhost;
+        public static readonly Color DefaultTitleText = Deucarian.Theming.DeucarianLegacyControlColors.TitleText;
+        public static readonly Color DefaultBodyText = Deucarian.Theming.DeucarianLegacyControlColors.BodyText;
+        public static readonly Color DefaultSmallText = Deucarian.Theming.DeucarianLegacyControlColors.SmallText;
+        public static readonly Color DefaultMutedText = Deucarian.Theming.DeucarianLegacyControlColors.MutedText;
+        public static readonly Color DefaultInputText = Deucarian.Theming.DeucarianLegacyControlColors.InputText;
+        public static readonly Color DefaultPlaceholderText = Deucarian.Theming.DeucarianLegacyControlColors.PlaceholderText;
+        public static readonly Color DefaultIcon = Deucarian.Theming.DeucarianLegacyControlColors.Icon;
+        public static readonly Color DefaultImage = Deucarian.Theming.DeucarianLegacyControlColors.Image;
+        public static readonly Color DefaultImageMuted = Deucarian.Theming.DeucarianLegacyControlColors.ImageMuted;
+        public static readonly Color DefaultImageSubtle = Deucarian.Theming.DeucarianLegacyControlColors.ImageSubtle;
+        public static readonly Color DefaultSliderTrack = Deucarian.Theming.DeucarianLegacyControlColors.SliderTrack;
+        public static readonly Color DefaultOutline = Deucarian.Theming.DeucarianLegacyControlColors.Outline;
+        public static readonly Color DefaultErrorText = Deucarian.Theming.DeucarianLegacyControlColors.ErrorText;
+        public static readonly Color DefaultKeyboardAccent = Deucarian.Theming.DeucarianLegacyControlColors.KeyboardAccent;
+        public static readonly Color DefaultKeyboardBackground = Deucarian.Theming.DeucarianLegacyControlColors.KeyboardBackground;
+        public static readonly Color DefaultKeyboardOutline = Deucarian.Theming.DeucarianLegacyControlColors.KeyboardOutline;
+        public static readonly Color DefaultKeyboardInputText = Deucarian.Theming.DeucarianLegacyControlColors.KeyboardInputText;
+        public static readonly Color DefaultControlSubtleBackground = Deucarian.Theming.DeucarianLegacyControlColors.ControlSubtleBackground;
+        public static readonly Color DefaultControlDarkBorder = Deucarian.Theming.DeucarianLegacyControlColors.ControlDarkBorder;
+        public static readonly Color DefaultSliderHandle = Deucarian.Theming.DeucarianLegacyControlColors.SliderHandle;
+        public static readonly Color DefaultLoadingIndicator = Deucarian.Theming.DeucarianLegacyControlColors.LoadingIndicator;
+        public static readonly Color DefaultDropdownInvalidState = Deucarian.Theming.DeucarianLegacyControlColors.DropdownInvalidState;
+        public static readonly Color DefaultKeyboardContentAccent = Deucarian.Theming.DeucarianLegacyControlColors.KeyboardContentAccent;
+        public static readonly Color DefaultTransparent = Deucarian.Theming.DeucarianLegacyControlColors.Transparent;
 
         public static event Action<XrUiColorPalette> PaletteChanged;
 
@@ -132,6 +132,15 @@ namespace Deucarian.XRUI
         [SerializeField] [Range(0f, 2f)] private float _pressedMultiplier = 1f;
         [SerializeField] [Range(0f, 2f)] private float _selectedMultiplier = 1f;
         [SerializeField] [Range(0f, 2f)] private float _disabledMultiplier = 1f;
+
+        private XrUiInteractionColors? resolvedInteractionColors;
+
+        /// <summary>Supplies fully resolved state colors from an external theme, without changing authored multiplier settings.</summary>
+        public void SetResolvedInteractionColors(Color normal, Color highlighted, Color pressed, Color selected, Color disabled)
+        {
+            resolvedInteractionColors = new XrUiInteractionColors(normal, highlighted, pressed, selected, disabled);
+            NotifyPaletteChanged();
+        }
 
         public Color Normal { get => GetInteractionColor(CustomButtonVisualState.Normal); set => Background = value; }
         public Color Highlighted { get => GetInteractionColor(CustomButtonVisualState.Highlighted); set { Secondary = value; HighlightedMultiplier = 1f; } }
@@ -281,22 +290,15 @@ namespace Deucarian.XRUI
             return GetInteractionColor(state, XrUiSemanticColor.Background);
         }
 
+        /// <summary>Resolves authored semantic colors and multipliers without transient theme-state overrides.</summary>
+        public Color GetAuthoredInteractionColor(CustomButtonVisualState state) =>
+            XrUiInteractionColors.ResolveLegacy(this, state, XrUiSemanticColor.Background);
+
         public Color GetInteractionColor(CustomButtonVisualState state, XrUiSemanticColor normalSemantic)
         {
-            if (state == CustomButtonVisualState.Disabled)
-            {
-                return Disabled;
-            }
-
-            XrUiSemanticColor semantic = state switch
-            {
-                CustomButtonVisualState.Highlighted => XrUiSemanticColor.Secondary,
-                CustomButtonVisualState.Pressed => XrUiSemanticColor.Primary,
-                CustomButtonVisualState.Selected => XrUiSemanticColor.Primary,
-                _ => normalSemantic,
-            };
-
-            return Tint(GetSemanticColor(semantic), GetInteractionMultiplier(state));
+            return resolvedInteractionColors.HasValue
+                ? resolvedInteractionColors.Value.Resolve(this, state, normalSemantic)
+                : XrUiInteractionColors.ResolveLegacy(this, state, normalSemantic);
         }
 
         public static bool TryResolveSemanticColor(Color color, out XrUiSemanticColor semanticColor)
@@ -439,14 +441,6 @@ namespace Deucarian.XRUI
             _selectedMultiplier = Mathf.Clamp(_selectedMultiplier, 0f, 2f);
             _disabledMultiplier = Mathf.Clamp(_disabledMultiplier, 0f, 2f);
             NotifyPaletteChanged();
-        }
-
-        private static Color Tint(Color color, float multiplier)
-        {
-            return new Color(Mathf.Clamp01(color.r * multiplier),
-                             Mathf.Clamp01(color.g * multiplier),
-                             Mathf.Clamp01(color.b * multiplier),
-                             color.a);
         }
 
         private static bool IsNearSemantic(Color color, Color defaultColor, Color paletteColor)

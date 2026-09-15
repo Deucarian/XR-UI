@@ -1,6 +1,6 @@
 {
   "name": "com.deucarian.xr-ui",
-  "version": "0.2.2",
+  "version": "0.4.0",
   "displayName": "Deucarian XR UI",
   "description": "Standalone XR-ready uGUI pressable controls, world canvas helpers, poke affordances, and neutral visual settings.",
   "unity": "2022.3",
@@ -19,8 +19,9 @@
     "pressable"
   ],
   "dependencies": {
+    "com.deucarian.theming": "1.10.0",
     "com.deucarian.common": "0.2.1",
-    "com.deucarian.editor": "1.7.0",
+    "com.deucarian.editor": "1.13.0",
     "com.unity.inputsystem": "1.8.1",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.ugui": "1.0.0",

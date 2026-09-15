@@ -7,10 +7,7 @@ namespace Deucarian.XRUI
     public static class UiButtonTint
     {
         #region Public Methods
-        public static Color Tint(Color c, float factor) => new Color(Mathf.Clamp01(c.r * factor),
-                                                                     Mathf.Clamp01(c.g * factor),
-                                                                     Mathf.Clamp01(c.b * factor),
-                                                                     c.a);
+        public static Color Tint(Color c, float factor) => Deucarian.Theming.DeucarianControlColorMath.Tint(c, factor);
 
         public static void ApplyPalette(Selectable target, Color baseColor, float selectedBoost = 1f)
         {
@@ -38,13 +35,14 @@ namespace Deucarian.XRUI
 
             ColorBlock cb = target.colors;
             cb.colorMultiplier = 1f;
-            float resolvedSelectedBoost = XrUiPaletteScope.Resolve(target).UseInteractionStateMultipliers ? selectedBoost : 1f;
+            XrUiColorPalette palette = XrUiPaletteScope.Resolve(target);
+            float resolvedSelectedBoost = palette.UseInteractionStateMultipliers ? selectedBoost : 1f;
 
             cb.normalColor = baseColor;
-            cb.highlightedColor = XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Highlighted);
-            cb.pressedColor = XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Pressed);
-            cb.selectedColor = Tint(XrUiPaletteScope.Resolve(target).GetInteractionColor(CustomButtonVisualState.Selected), resolvedSelectedBoost);
-            cb.disabledColor = XrUiPaletteScope.Resolve(target).Disabled;
+            cb.highlightedColor = palette.GetInteractionColor(CustomButtonVisualState.Highlighted);
+            cb.pressedColor = palette.GetInteractionColor(CustomButtonVisualState.Pressed);
+            cb.selectedColor = Tint(palette.GetInteractionColor(CustomButtonVisualState.Selected), resolvedSelectedBoost);
+            cb.disabledColor = palette.Disabled;
 
             target.colors = cb;
         }

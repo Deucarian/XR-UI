@@ -15,25 +15,18 @@ namespace Deucarian.XRUI.Controls.Editor
             DeucarianToolRegistry.Register(new DeucarianToolDescriptor(
                 ToolId,
                 "XR UI Settings",
-                "Create or select project-local XR UI settings and palette assets.",
+                "Configure XR controls and connect their appearance to Theming.",
                 DeucarianControlCenterArea.Experience,
                 OpenSettings,
                 PackageId,
                 searchTerms: new[] { "xr", "ui", "settings", "palette" },
-                order: 320, createPage: () => DeucarianEditorImGuiPage.Create(ToolId, () =>
-                {
-                    DeucarianEditorTextGUI.HelpBox("Create or select project-local XR UI settings and palette assets.", MessageType.Info);
-                    if (DeucarianEditorActionGUI.Button("Create or select settings"))
-                        CustomButtonReplacementEditor.CreateOrSelectGlobalSettings();
-                    if (DeucarianEditorActionGUI.Button("Create or select palette"))
-                        CustomButtonReplacementEditor.CreateOrSelectGlobalColorPalette();
-                })));
+                order: 320, createPage: () => new XrUiSettingsPage().Page));
             DeucarianControlCenterRegistry.RegisterCardProvider(new Provider());
         }
 
         private static void OpenSettings()
         {
-            CustomButtonReplacementEditor.CreateOrSelectGlobalSettings();
+            DeucarianEditorToolWindow.Open(ToolId);
         }
 
         private sealed class Provider : IDeucarianControlCenterCardProvider
@@ -45,19 +38,18 @@ namespace Deucarian.XRUI.Controls.Editor
             {
                 bool hasSettings = AssetDatabase.LoadAssetAtPath<CustomButtonSettings>(
                     CustomButtonReplacementEditor.SettingsPath) != null;
-                bool hasPalette = AssetDatabase.LoadAssetAtPath<XrUiColorPalette>(
-                    CustomButtonReplacementEditor.PalettePath) != null;
-                int configuredCount = (hasSettings ? 1 : 0) + (hasPalette ? 1 : 0);
+                bool hasTheming = DeucarianToolRegistry.TryGet("deucarian.theming.project-setup", out _);
+                string paletteTool = hasTheming ? "deucarian.theming.project-setup" : DeucarianToolIds.PackageInstaller;
                 yield return new DeucarianControlCenterCard(
                     PackageId + ".experience",
                     DeucarianControlCenterArea.Experience,
                     "XR UI",
-                    "Manage the domain-owned global settings and color palette assets.",
+                    "Configure control behavior. Visual palettes are owned by Theming.",
                     PackageId,
-                    configuredCount == 2
+                    hasSettings
                         ? DeucarianControlCenterStatus.Success
                         : DeucarianControlCenterStatus.Info,
-                    configuredCount + " of 2 project assets configured",
+                    hasSettings ? "Project controls configured" : "Package control defaults",
                     order: 320,
                     details: new[]
                     {
@@ -71,8 +63,9 @@ namespace Deucarian.XRUI.Controls.Editor
                             () => CustomButtonReplacementEditor.CreateOrSelectGlobalSettings()),
                         new DeucarianControlCenterAction(
                             "palette",
-                            "Create or Select Palette",
-                            () => CustomButtonReplacementEditor.CreateOrSelectGlobalColorPalette())
+                            hasTheming ? "Theming setup" : "Get Theming",
+                            () => DeucarianEditorToolWindow.Open(paletteTool),
+                            navigationToolId: paletteTool)
                     },
                     searchTerms: new[] { "xr", "controls", "palette", "settings" });
             }
